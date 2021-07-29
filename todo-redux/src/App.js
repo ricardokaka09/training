@@ -26,7 +26,7 @@ function App({ todoReducer: { process, finished, notice } }) {
     setWorking("");
   };
 
-  useEffect(() => {});
+  useEffect(() => {}, [process, finished]);
   return (
     <div className="container">
       <main>
@@ -46,7 +46,12 @@ function App({ todoReducer: { process, finished, notice } }) {
         </form>
         <div className="list">
           <ul>
-            <TodoItem />
+            {process?.map((task, i) => (
+              <TodoItem task={task} checked={false} />
+            ))}
+            {finished?.map((task, i) => (
+              <TodoItem task={task} checked={true} />
+            ))}
           </ul>
         </div>
       </main>
