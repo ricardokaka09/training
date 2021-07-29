@@ -5,9 +5,9 @@ import todoReducer from "./constants/reducer/todo.reducer";
 import combineReducers from "./constants/reducer/index";
 
 const initialState = {};
-const middleware = [thunk];
+const middleware = [thunk]; //  that used dispatch function
 
-// tao store includes the entries state for signle-page
+// tao store includes the entries state for single-page
 const store = createStore(
   combineReducers,
   initialState,

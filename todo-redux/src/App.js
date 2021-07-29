@@ -11,7 +11,8 @@ function App({ todoReducer: { process, finished, notice } }) {
   const onSubmit = (e) => {
     e.preventDefault();
     // console.log("active");
-    if (working !== "") {
+    let [checkTask] = process?.filter((item) => item === working) || [];
+    if (working !== "" && checkTask !== working) {
       store.dispatch({
         type: "add",
         payload: { process: working, mess: "success" },
@@ -22,11 +23,8 @@ function App({ todoReducer: { process, finished, notice } }) {
         payload: { mess: "todo don't create" },
       });
     }
-    console.log(working);
     setWorking("");
   };
-
-  useEffect(() => {}, [process, finished]);
   return (
     <div className="container">
       <main>
