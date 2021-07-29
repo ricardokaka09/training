@@ -1,0 +1,107 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-shadow: border-box;
+}
+html {
+  font-size: 10px;
+}
+:root {
+  --bg-color: #41b3e0;
+  --bg-color-dark: #1a80a8;
+  --bg-form: #ead7d7;
+  --color-text-done: #877a7a;
+}
+#root {
+  background-image: linear-gradient(
+    to right bottom var(--bg-color) var(--bg-color-dark)
+  );
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; */
+}
+.container {
+  background-image: linear-gradient(
+    to right bottom,
+    var(--bg-color),
+    var(--bg-color-dark)
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* height: 90vh; */
+  /* position: relative; */
+  padding: 10rem;
+}
+main {
+  font-size: 1.6rem;
+  padding: 5rem;
+  height: 60vh;
+
+  background-color: var(--bg-form);
+  border-radius: 5px;
+  box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.3);
+
+  /* align-items: center; */
+}
+.formToDo {
+}
+.todo {
+  padding: 5px;
+  font-size: 2rem;
+  border: none;
+  border-radius: 10px;
+}
+.todo:focus {
+  outline: none;
+}
+button {
+  margin-left: 5rem;
+  padding: 10px 20px;
+  text-transform: uppercase;
+
+  background-color: green;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+button:hover {
+  transform: translateY(-5px);
+}
+button:active {
+  transform: translateY(-2px);
+}
+
+.list {
+  margin-top: 5rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+ul {
+  text-decoration: none;
+  list-style: none;
+}
+li {
+  display: block;
+}
+li:not(:last-child) {
+  margin-bottom: 10px;
+}
+.list__checkbox {
+  margin-right: 10px;
+}
+p {
+  display: inline;
+  /* text-decoration: line-through; */
+}
+input[type="checkbox"]:checked + p {
+  color: var(--color-text-done);
+  text-decoration: line-through;
+}
