@@ -1,5 +1,10 @@
 // function person(name: string) {
 //   return `hello ${name}`;
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 function greeter(person) {
     return ("Hello, " +
         person.firstName +
@@ -66,3 +71,58 @@ var x;
 x = "hello";
 // ...
 x = "howdy";
+// Exactly the same as the earlier example
+function printCoord(pt) {
+    console.log("The coordinate's x value is " + pt.x());
+    console.log("The coordinate's y value is " + pt.y);
+}
+printCoord({ x: function () { return "hung"; }, y: 100 });
+function isFish(pet) {
+    // console.log((pet as Bird).fly);
+    // if ((pet as Fish).swim !== undefined) {
+    //   console.log(pet.swim);
+    // }
+    console.log(pet.swim);
+    return pet.swim !== undefined;
+}
+var roFish = isFish({ swim: function () { return "Hung"; } });
+var saoBird = isFish({ fly: function () { return "chim sao"; } });
+console.log(roFish);
+console.log(saoBird);
+function getArea(shape) {
+    var pi = Math.PI;
+    if (shape.kind === "circle")
+        return (Math.PI * Math.pow(shape.radius, 2)).toFixed(2);
+    return shape.sideLength * shape.sideLength;
+}
+console.log(getArea({ kind: "circle", radius: 2 }));
+function doSomething(fn) {
+    console.log(fn.description + " returned " + fn(6));
+}
+function fn_2(someArg) {
+    return true;
+}
+// doSomething({description: 'Hung',fn_2})
+function firstElement(arr) {
+    return arr[0];
+}
+console.log(firstElement(["dnag", 1, 2, 3, "hung"]));
+function map(arr, func) {
+    return arr.map(func);
+}
+console.log(map(["12", "2", "4", "5"], function (n) { return +n * 2; }));
+function combine_2(arr1, arr2) {
+    return __spreadArray(__spreadArray([], arr1), arr2);
+}
+var arr_combine = combine_2([1, 2, 3], ["hung", "cong", "hung"]);
+console.log(arr_combine);
+function filter1(arr, func) {
+    return arr.filter(func);
+}
+console.log(filter1([1, 2, 3, 4], function (n) { return (n > 1 ? true : false); }));
+// optionalFunc(1);
+function optionalCallback(arr, callBack) {
+    for (var i = 0; i <= arr.length; i++) {
+        callBack(arr[i], i);
+    }
+}
