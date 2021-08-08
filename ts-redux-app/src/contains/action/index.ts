@@ -8,4 +8,9 @@ interface ActionError {
   payload: string;
 }
 
-export type Action = ActionSuccess | ActionError;
+interface GetMusicType {
+  type: ActionType.GETMUSICTYPES;
+  payload: string[];
+}
+
+export type Action = ActionSuccess | ActionError | GetMusicType;
