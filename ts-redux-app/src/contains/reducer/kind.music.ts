@@ -1,4 +1,4 @@
-import { Action } from "../action";
+import { GetMusicType } from "../action";
 import { ActionType } from "../actionType";
 
 const initialState = {
@@ -6,19 +6,19 @@ const initialState = {
   loading: false,
   error: false,
   kind: null,
-  musics: [],
+  data: [],
 };
 interface musicTypes {
   isAuthenticated: boolean;
   loading: boolean;
   error: boolean;
   kind: string | null;
-  musics: string[] | string;
+  data: string[];
 }
 
 const kindMusics = (
   state: musicTypes = initialState,
-  { type, payload }: Action
+  { type, payload }: GetMusicType
 ): musicTypes => {
   switch (type) {
     case ActionType.GETMUSICTYPES:
@@ -26,7 +26,7 @@ const kindMusics = (
         ...state,
         loading: true,
         error: false,
-        musics: payload,
+        data: payload,
       };
     default:
       return state;

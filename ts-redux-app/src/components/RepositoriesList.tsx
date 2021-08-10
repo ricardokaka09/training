@@ -1,71 +1,88 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useAction } from "../hooks/useAction";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getMusic } from "../contains/action-creators";
+import { getMusic, setKindMusic } from "../contains/action-creators";
 import "./style.css";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { RootState } from "../contains";
+import { Audio } from "./audio/Audio";
+import RepoList from "./repository/RepoList";
 
-const RepositoriesList: React.FC = (user) => {
+const RepositoriesList: React.FC = () => {
+  // const { data } = musics;
   const [term, setTerm] = useState("");
   const [kind, setKind] = useState("Nhạc Trẻ");
-  const audioRef = useRef(null);
-  const { getMusic } = useAction();
-  const state = useTypedSelector((state) => state.user);
-  console.log(user);
+  const [songs, setSongs] = useState([]);
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const [repo, setRepo] = useState<string[]>();
 
-    getMusic(kind);
-    // console.log();
+  const [playing, setPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [src, setSrc] = useState<string>();
+  const { getMusic, playingSong, setKindMusic } = useAction();
+  const user = useTypedSelector((state) => state.user);
+  const musics = useTypedSelector((state) => state.musics);
+
+  // setSongs(musics.data);
+  // console.log(songs);
+  useEffect(() => {
+    getMusic("Nhạc Trẻ");
+    const getkindMusic = async () => {
+      const kind: any = await setKindMusic();
+      setRepo(kind);
+      console.log(kind);
+    };
+    getkindMusic();
+    // playingSong(musics.data[0]);
+  }, []);
+  const onSubmit = (name: string) => {
+    getMusic(name);
   };
-  const onChangMusicType = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setKind(event.target.value);
+  const onChangMusicType = (name: string) => {
+    setKind(name);
   };
+  // const handleRef = () => {
+  //   playing ? audioRef.current?.pause() : audioRef.current?.play();
+  //   setPlaying(!playing);
+  // };
+  useEffect(() => {
+    let link: any = musics.data[0];
+    setSrc(link?.music);
+    console.log(musics.data[0]);
+    console.log(audioRef.current?.duration);
+    console.log(audioRef.current?.currentTime);
+  }, [musics.data[0]]);
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <div className="optionKinds">
+      {repo?.map((item: any) => (
+        <RepoList
+          name={item.name}
+          avatar={item.songs[0].coverImage}
+          onClick={() => onSubmit(item.name)}
+        />
+      ))}
+      {/* <form onSubmit={onSubmit}>
         <select value={kind} onChange={onChangMusicType}>
           <option value="Nhạc Trẻ">Nhạc Trẻ</option>
           <option value="Trữ Tình">Trữ Tình</option>
           <option value="Tiền Chiến">Tiền Chiến</option>
           <option value="Rap Việt">Rap Viet</option>
         </select>
-        {/* <input value={term} onChange={(e) => setTerm(e.target.value)} /> */}
         <button>Get Music</button>
-      </form>
-      <div className="card">
-        <div className="card__top"></div>
-        <audio
-          ref={audioRef}
-          src="abc.mmm"
-          className="card__audio"
-          controls
-        ></audio>
-        <div className="card__button">
-          <div className="button">
-            <span>Pre</span>
-          </div>
-          <div className="button">
-            <span>Play</span>
-          </div>
-          <div className="button">
-            <span>Next</span>
-          </div>
-        </div>
-      </div>
+      </form> */}
     </div>
   );
 };
 RepositoriesList.propTypes = {
   user: PropTypes.object.isRequired,
+  musics: PropTypes.object.isRequired,
   getMusic: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state: RootState) => ({
   user: state.user,
+  musics: state.musics,
 });
 
 export default connect(mapStateToProps, { getMusic })(RepositoriesList);
