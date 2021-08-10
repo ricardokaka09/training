@@ -29,15 +29,17 @@ export const Audio: React.FC = () => {
   const { playingSong } = useAction();
 
   useEffect(() => {
-    // setSrc(audio?.music);
     setSrc(song?.music);
     setIndex(song?.id);
-    // console.log(song?.id);
+    setPlaying(playing);
   }, [song]);
-
+  useEffect(() => {
+    setPlaying(false);
+  }, [musics]);
   const loadedDataAudio = () => {
     setduration(audioRef.current?.duration);
     setCurrentTime(audioRef.current?.currentTime);
+    playing ? audioRef.current?.play() : audioRef.current?.pause();
     // audioRef.current?.play();
   };
 
