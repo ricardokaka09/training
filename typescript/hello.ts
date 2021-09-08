@@ -236,3 +236,67 @@ function optionalCallback(
     callBack(arr[i], i);
   }
 }
+
+type stringNumberPair = [string, number, ...boolean[]];
+
+const stringNum_1: stringNumberPair = ["hung", 2, true, true, true, false];
+console.log(stringNum_1);
+
+// CLASSES
+/**----------------------------------------- */
+
+class Point1 {
+  k = 4;
+  a = 1;
+  b = 2;
+  // x: number;
+  // y: number;
+  // constructor(x: number, y: number){
+  //   this.x = x;
+  //   this.y = y;
+  // }
+}
+
+class Point2 extends Point1 {
+  _length = 1;
+  constructor() {
+    super();
+    console.log(this.k);
+  }
+  scale(a: number, b: number): void {
+    this.a += a;
+    this.b += b;
+  }
+
+  // getter & setter
+  // get length() {
+  //   return this._length;
+  // }
+  // set length(value) {
+  //   this._length = value;
+  // }
+}
+
+let point__2 = new Point2();
+point__2.scale(1, 2);
+console.log(point__2.a + "\n\n" + point__2.b);
+
+/**------------X--------------X--------------- */
+
+const some = class<Type> {
+  content: Type;
+  constructor(value: Type) {
+    this.content = value;
+  }
+  // this Type
+  check(th: this) {
+    return th.content === this.content;
+  }
+
+  // Arrow function
+  getContent = () => {
+    return this.content;
+  };
+};
+
+let sm = new some("hung");

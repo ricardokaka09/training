@@ -1,5 +1,20 @@
 // function person(name: string) {
 //   return `hello ${name}`;
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __spreadArray = (this && this.__spreadArray) || function (to, from) {
     for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
         to[j] = from[i];
@@ -126,3 +141,55 @@ function optionalCallback(arr, callBack) {
         callBack(arr[i], i);
     }
 }
+var stringNum_1 = ["hung", 2, true, true, true, false];
+console.log(stringNum_1);
+// CLASSES
+/**----------------------------------------- */
+var Point1 = /** @class */ (function () {
+    function Point1() {
+        this.k = 4;
+        this.a = 1;
+        this.b = 2;
+        // x: number;
+        // y: number;
+        // constructor(x: number, y: number){
+        //   this.x = x;
+        //   this.y = y;
+        // }
+    }
+    return Point1;
+}());
+var Point2 = /** @class */ (function (_super) {
+    __extends(Point2, _super);
+    function Point2() {
+        var _this = _super.call(this) || this;
+        _this._length = 1;
+        console.log(_this.k);
+        return _this;
+    }
+    Point2.prototype.scale = function (a, b) {
+        this.a += a;
+        this.b += b;
+    };
+    return Point2;
+}(Point1));
+var point__2 = new Point2();
+point__2.scale(1, 2);
+console.log(point__2.a + "\n\n" + point__2.b);
+/**------------X--------------X--------------- */
+var some = /** @class */ (function () {
+    function class_1(value) {
+        var _this = this;
+        // Arrow function
+        this.getContent = function () {
+            return _this.content;
+        };
+        this.content = value;
+    }
+    // this Type
+    class_1.prototype.check = function (th) {
+        return th.content === this.content;
+    };
+    return class_1;
+}());
+var sm = new some("hung");
